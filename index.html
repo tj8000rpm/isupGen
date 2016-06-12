@@ -1,0 +1,24 @@
+<html>
+	<head>
+		<title>
+			ISUP信号ジェネレータ
+		</title>
+		<script type="text/javascript" src="test.js"></script>
+		<script type="text/javascript" src="jquery.min.js"></script>
+	</head>
+	<body onLoad="init()">
+		<div id="paramField">
+			<select id="paramaters" size="1"  onChange="selectParam(this)">
+				<option value="blank">---</option>
+			</select>
+		</div>
+		<div id="subField">
+		</div>
+		<div id="resultField">
+			<div><input type="button" value="Create" onClick="createSignal()"></input></div>
+			<div>パラメータ、レングス無し</label><input type="text" id="result1" value=""></input></div>
+			<div>パラメータ、レングス有り</label><input type="text" id="result2" value=""></input></div>
+		</div>
+		</div>
+	</body>
+</html>
