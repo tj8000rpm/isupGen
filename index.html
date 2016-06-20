@@ -3,21 +3,28 @@
 		<title>
 			ISUP信号ジェネレータ
 		</title>
+		<style type="text/css">
+			<!--
+			.fields {float:left;padding:20px 20px }
+			p{margin:0;}
+			div{border:thin dotted #777}
+			-->
+		</style>
 		<script type="text/javascript" src="test.js"></script>
 		<script type="text/javascript" src="jquery.min.js"></script>
 	</head>
 	<body onLoad="init()">
-		<div id="paramField">
+		<div id="paramField" class="fields">
 			<select id="paramaters" size="1"  onChange="selectParam(this)">
 				<option value="blank">---</option>
 			</select>
 		</div>
-		<div id="subField">
+		<div id="subField" class="fields">
 		</div>
-		<div id="resultField">
+		<div id="resultField" class="fields">
 			<div><input type="button" value="Create" onClick="createSignal()"></input></div>
-			<div>パラメータ、レングス無し</label><input type="text" id="result1" value=""></input></div>
-			<div>パラメータ、レングス有り</label><input type="text" id="result2" value=""></input></div>
+			<div>パラメータ、レングス無し</label><input type="text" id="result1" value="" size=20></input></div>
+			<div>パラメータ、レングス有り</label><input type="text" id="result2" value="" size=20></input></div>
 		</div>
 		</div>
 	</body>
