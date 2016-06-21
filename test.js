@@ -24,13 +24,16 @@ var htmlInitation = function(){
 
 var selectParam = function(obj){
 	var paramHex=obj.value;
-	var subField=document.getElementById("subField");
+	var subField=document.getElementById("sigField");
 	var result=[document.getElementById("result1"),document.getElementById("result2")];
 	subField.textContent=null;
 	result[0].value="";
 	result[1].value="";
 	result[0].size=20;
 	result[1].size=20;
+
+	subField.value=paramHex;
+	subField.className="length";
 
 	//設定項目が一つの場合
 	var selPrm = isupData[obj.value];
@@ -57,9 +60,15 @@ var selectParam = function(obj){
 	}
 	//設定項目が１つ以上の場合
 	else{
+		var unitField=undefined;
 		for(var key in selPrm){
 			if(key!="_description" && key!="_add"){
-				addMenu(selPrm[key],paramHex+","+key,subField);
+				if(unitField==undefined){
+					unitField=document.createElement("div");
+					unitField.className="unit";
+					subField.appendChild(unitField);
+				}
+				addMenu(selPrm[key],paramHex+","+key,unitField);
 			}
 			else if(key=="_add"){
 				addAddButton(selPrm[key],selPrm[key]._description,paramHex+","+key,subField);
@@ -151,16 +160,25 @@ var addButtonEvent = function(obj,subField){
 			if(newid!="") newid+=","
 			newid+=key;
 			type=target._type;
-			for(key in target){
-				if(key=="_add"){
+
+			var unitField=undefined;
+			for(var key2 in target){
+				if(key2=="_add"){
 					var field=document.createElement("div");
+					field.className="length";
+					field.value=key;
 					subField.appendChild(field);
 					if(type=="pivot")
-						addAddButton(target[key],target._description,newid+",_add",field,newid);
+						addAddButton(target[key2],target._description,newid+",_add",field,newid);
 					else
-						addAddButton(target[key],target._description,newid+",_add",field);
-				}else if(!key.match("^_.*$")){
-					addMenu(target[key],newid+","+key,subField);
+						addAddButton(target[key2],target._description,newid+",_add",field);
+				}else if(!key2.match("^_.*$")){
+					if(unitField==undefined){
+						unitField=document.createElement("div");
+						unitField.className="unit";
+						subField.appendChild(unitField);
+					}
+					addMenu(target[key2],newid+","+key2,unitField);
 				}else{
 				}
 			}
@@ -173,24 +191,39 @@ var addButtonEvent = function(obj,subField){
 	
 	
 }
-var createSignal = function(){
-	var result1=document.getElementById("result1");
-	var result2=document.getElementById("result2");
-	var field=document.getElementById("subField");
-	var childlen=field.childNodes;
+var getSubResult = function(tag){
+	var divClass=tag.className;
+	var divId=tag.value;
+	var childlen=tag.childNodes;
+	var result="";
+
+	if(divClass=="length"){
+		for(var i=0;i<childlen.length;i++){
+			var tag=childlen[i];
+			if(tag.tagName.search("^[dD][iI][vV]$")!=-1){
+				result+=getSubResult(tag);
+			}
+		}
+		
+		result=("00"+Number(result.length/2).toString(16)).slice(-2)+result;
+		result=("00"+divId).slice(-2)+result;
+
+	}else if(divClass=="unit"){
+		result=createUnitSignal(tag);
+	}
+
+	//console.log(result);
+
+	return result;
+}
+
+var createUnitSignal = function(tag){
 	var binStr="";
-	var paramNo="";
-	var pivotFlag=true;
-	var pivotMem={};
-	var pivotLabelMem={};
-	var pivotAry=[];
-	var multiOffset=0;
-	var preLen=0;
+	var childlen=tag.childNodes;
 
 	for(var i=0;i<childlen.length;i++){
 		//div tag
 		var div=childlen[i];
-
 		//input,select etc...(Label:INPUT)なので末尾だけ取得
 		var part=div.childNodes[div.childNodes.length-1];
 
@@ -202,9 +235,9 @@ var createSignal = function(){
 		// idのカンマ区切りを分割
 		var idArray=id.split(",");
 
+		//設定値を取得
 		var val=childlen[i].childNodes[childlen[i].childNodes.length-1].value;
 		paramNo=idArray[0];
-//		pivotFlag=isupData[paramNo]._type=="pivot";
 		
 		// 構造体のrootを取得
 		var target=isupData;
@@ -212,34 +245,16 @@ var createSignal = function(){
 		for(var j=0;j<idArray.length;j++){
 			target=target[idArray[j]];
 		}
-	//	var res;
-	//	if(res=/^.*_idx([0-9]+)$/g.exec(idArray[idArray.length-1])){
-	//		console.log(res[1]);
-	//	}
-		if(pivotMem[id]==undefined && target._type!="pivot"){
-			pivotMem[id]=0;
-			var preIDPrnt=""+((""+pivotAry[pivotAry.length-1]).split(",").slice(0,-1));
-			var crtIDPrnt=""+(id.split(",").slice(0,-1));
-			if(pivotAry.length==0 || preIDPrnt!=crtIDPrnt)
-				multiOffset=((binStr.length)/8);
-			pivotAry.push(id);
-		}else{
-			pivotMem[id]++;
-			//console.log("A:"+binStr);
-			if(pivotMem[pivotAry[0]]!=pivotMem[pivotAry[1]]){
-				//console.log(binStr.length);
-				multiOffset=((binStr.length)/8);
-				//console.log(multiOffset);
-			}
-		}
-		
-		preLen=binStr.length;
-		
+
 		var offset=target._offset;
 
 		if(target._type=="num"){
 			var newval="";
+
+			//奇数なら偶数になるように0で埋める
 			if(val.length%2!=0) val=val+"0";
+
+			//bigendianになるように並び替え
 			for(c in val){
 				var newlen=newval.length;
 				if(c%2==0){
@@ -248,10 +263,13 @@ var createSignal = function(){
 					newval=newval.substr(0,newlen-1)+val[c]+newval.substr(newlen-1,1);
 				}
 			}
+
+			//hex文字列をバイナリ文字列に変換する
 			for(c in newval){
 				var digit=("0000"+Number("0x"+newval[c]).toString(2)).slice(-4);
 				binStr+=digit;
 			}
+
 		}else if(target._type=="raw"){
 			var newval="";
 			if(val.length%2!=0) val=val+"0";
@@ -264,7 +282,7 @@ var createSignal = function(){
 			}
 		}else if(target._type=="bin"){
 			var x=offset[0];
-			var y=offset[1]+multiOffset;
+			var y=offset[1];
 			var l=offset[2];
 
 			for(var j=binStr.length;j<x+y*8+l;j++){
@@ -273,19 +291,11 @@ var createSignal = function(){
 
 			var binVal=("00000000"+Number(val).toString(2)).slice(-l);
 
-//			console.log(val);
-//			console.log(val.toString(2));
-//			console.log(binVal);
 			binStr=binStr.substr(0,x+y*8)+binVal+binStr.substr(x+y*8+l,binStr.length-x+y*8+l);
-		}else if(target._type=="pivot"){
-			binStr=calcPivotElement(pivotLabelMem,binStr);
-			//console.log(binStr);
-			pivotLabelMem=[idArray[idArray.length-1],binStr.length];
 		}else{
 			var x=offset[0];
-			var y=offset[1]+multiOffset;
+			var y=offset[1];
 			var l=offset[2];
-			console.log("***:"+x+","+y+","+l+","+multiOffset+","+id);
 			
 			if(l==-1){
 				l=val.length;
@@ -302,16 +312,7 @@ var createSignal = function(){
 			binStr=binStr.substr(0,x+y*8)+binVal+binStr.substr(x+y*8+l,binStr.length-x+y*8+l);
 			//console.log(x+","+y+","+l);
 		}
-		//console.log("A:"+binStr);
-///		if(preLen!=binStr.length && pivotAry.length==0){
-///			console.log(preLen);
-///			//console.log(binStr.length);
-///			multiOffset=((binStr.length)/8);
-///		//	console.log(multiOffset);
-///		}
 	}
-	//console.log(binStr);
-	binStr=calcPivotElement(pivotLabelMem,binStr);
 
 	// 2進数表記で長さが8の倍数になるまで0埋
 	while(binStr.length%8!=0){
@@ -328,33 +329,34 @@ var createSignal = function(){
 	while(result.length<binStr.length/4){
 		result="0"+result;
 	}
+
+	return result;
+}
+
+var createSignal = function(){
+	var result1=document.getElementById("result1");
+	var result2=document.getElementById("result2");
+	var field=document.getElementById("sigField");
+	var childlen=field.childNodes;
+	var result="";
+
+	result=getSubResult(field);
+	/*
+	for(var i=0;i<childlen.length;i++){
+		var tag=childlen[i];
+		if(tag.tagName.search("^[dD][iI][vV]$")!=-1){
+			result+=getSubResult(tag);
+		}
+	}
+*/
 	//console.log(result);
 	// 信号単体を出力
-	result1.value=result;
+	//result1.value=result;
+	result1.value=result.slice(-(result.length-4));
 	// パラメータ番号とパラメータレングスをつけて出力
-	result2.value=paramNo+("0"+(result.length/2).toString(16)).slice(-2)+result;
+	//result2.value=paramNo+("0"+(result.length/2).toString(16)).slice(-2)+result;
+	result2.value=result;
 	result1.size=result2.value.length*1.5;
 	result2.size=result2.value.length*1.5;
 }
 
-var calcPivotElement =function(pivotLabelMem,binStr){
-	if(pivotLabelMem.length==2){
-		var insertId=("00000000"+Number("0x"+pivotLabelMem[0]).toString(2)).slice(-8);
-		var insertPos=pivotLabelMem[1]
-		var insertLen=parseInt((binStr.length-insertPos)/8);
-		var insertLenBin=("00000000"+insertLen.toString(2)).slice(-8);
-		//console.log(binStr);
-		//console.log(binStr.substr(0,insertPos));
-		//console.log(insertLen);
-		//console.log(insertPos);
-		//console.log(insertId);
-		//console.log(insertLenBin);
-		binStr=binStr.substr(0,insertPos)+
-			   insertId+
-			   insertLenBin+
-			   binStr.substr(insertPos,binStr.length-insertPos);
-		//console.log(binStr);
-	}
-	return binStr;
-
-}
