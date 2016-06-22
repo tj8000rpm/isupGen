@@ -1062,27 +1062,23 @@
 					"_description":"事業者情報従属パラメータ名",
 					"fe":{
 						"_description":"事業者識別コード",
-						"_add":{
-							"unit":{
-								"_description":"事業者識別コード",
-								"H":{
-									"_description":"奇数偶数",
-									"_offset":[0,0,1],
-									"_values":{
-										"0":"番号ディジットの桁数が偶数",
-										"1":"番号ディジットの桁数が奇数"
-									}
-								},
-								"GFEDCBA":{
-									"_description":"予備",
-									"_offset":[1,0,7],
-									"_values":{
-										"00":"予備"
-									}
-								},
-								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+						"_type":"idLength",
+						"H":{
+							"_description":"奇数偶数",
+							"_offset":[0,0,1],
+							"_values":{
+								"0":"番号ディジットの桁数が偶数",
+								"1":"番号ディジットの桁数が奇数"
 							}
-						}
+						},
+						"GFEDCBA":{
+							"_description":"予備",
+							"_offset":[1,0,7],
+							"_values":{
+								"00":"予備"
+							}
+						},
+						"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
 					}
 				}
 			},
@@ -1091,27 +1087,23 @@
 					"_description":"事業者情報従属パラメータ名",
 					"fe":{
 						"_description":"事業者識別コード",
-						"_add":{
-							"unit":{
-								"_description":"事業者識別コード",
-								"H":{
-									"_description":"奇数偶数",
-									"_offset":[0,0,1],
-									"_values":{
-										"0":"番号ディジットの桁数が偶数",
-										"1":"番号ディジットの桁数が奇数"
-									}
-								},
-								"GFEDCBA":{
-									"_description":"予備",
-									"_offset":[1,0,7],
-									"_values":{
-										"00":"予備"
-									}
-								},
-								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+						"_type":"idLength",
+						"H":{
+							"_description":"奇数偶数",
+							"_offset":[0,0,1],
+							"_values":{
+								"0":"番号ディジットの桁数が偶数",
+								"1":"番号ディジットの桁数が奇数"
 							}
-						}
+						},
+						"GFEDCBA":{
+							"_description":"予備",
+							"_offset":[1,0,7],
+							"_values":{
+								"00":"予備"
+							}
+						},
+						"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
 					}
 				}
 			},
@@ -1120,27 +1112,23 @@
 					"_description":"事業者情報従属パラメータ名",
 					"fe":{
 						"_description":"事業者識別コード",
-						"_add":{
-							"unit":{
-								"_description":"事業者識別コード",
-								"H":{
-									"_description":"奇数偶数",
-									"_offset":[0,0,1],
-									"_values":{
-										"0":"番号ディジットの桁数が偶数",
-										"1":"番号ディジットの桁数が奇数"
-									}
-								},
-								"GFEDCBA":{
-									"_description":"予備",
-									"_offset":[1,0,7],
-									"_values":{
-										"00":"予備"
-									}
-								},
-								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+						"_type":"idLength",
+						"H":{
+							"_description":"奇数偶数",
+							"_offset":[0,0,1],
+							"_values":{
+								"0":"番号ディジットの桁数が偶数",
+								"1":"番号ディジットの桁数が奇数"
 							}
-						}
+						},
+						"GFEDCBA":{
+							"_description":"予備",
+							"_offset":[1,0,7],
+							"_values":{
+								"00":"予備"
+							}
+						},
+						"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
 					}
 				}
 			},
@@ -1149,51 +1137,45 @@
 					"_description":"事業者情報従属パラメータ名",
 					"fc":{
 						"_description":"POI-階梯情報",
-						"_add":{
-							"unit":{
-								"HGEF":{
-									"_description":"入側POI-階梯情報",
-									"_offset":[0,0,4],
-									"_values":{
-										"0":"表示なし",
-										"1":"階梯1",
-										"2":"階梯2"
-									}
-								},
-								"DCBA":{
-									"_description":"出側POI-階梯情報",
-									"_offset":[4,0,4],
-									"_values":{
-										"0":"表示なし",
-										"1":"階梯1",
-										"2":"階梯2"
-									}
-								}
+						"_type":"idLength",
+						"HGEF":{
+							"_description":"入側POI-階梯情報",
+							"_offset":[0,0,4],
+							"_values":{
+								"0":"表示なし",
+								"1":"階梯1",
+								"2":"階梯2"
+							}
+						},
+						"DCBA":{
+							"_description":"出側POI-階梯情報",
+							"_offset":[4,0,4],
+							"_values":{
+								"0":"表示なし",
+								"1":"階梯1",
+								"2":"階梯2"
 							}
 						}
 					},
 					"fe":{
 						"_description":"事業者識別コード",
-						"_add":{
-							"unit":{
-								"H":{
-									"_description":"奇数偶数",
-									"_offset":[0,0,1],
-									"_values":{
-										"0":"番号ディジットの桁数が偶数",
-										"1":"番号ディジットの桁数が奇数"
-									}
-								},
-								"GFEDCBA":{
-									"_description":"予備",
-									"_offset":[1,0,7],
-									"_values":{
-										"00":"予備"
-									}
-								},
-								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+						"_type":"idLength",
+						"H":{
+							"_description":"奇数偶数",
+							"_offset":[0,0,1],
+							"_values":{
+								"0":"番号ディジットの桁数が偶数",
+								"1":"番号ディジットの桁数が奇数"
 							}
-						}
+						},
+						"GFEDCBA":{
+							"_description":"予備",
+							"_offset":[1,0,7],
+							"_values":{
+								"00":"予備"
+							}
+						},
+						"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
 					}
 				}
 			},
@@ -1202,53 +1184,45 @@
 					"_description":"事業者情報従属パラメータ名",
 					"fc":{
 						"_description":"POI-階梯情報",
-						"_add":{
-							"unit":{
-								"_description":"POI階梯情報",
-								"HGEF":{
-									"_description":"入側POI-階梯情報",
-									"_offset":[0,0,4],
-									"_values":{
-										"0":"表示なし",
-										"1":"階梯1",
-										"2":"階梯2"
-									}
-								},
-								"DCBA":{
-									"_description":"出側POI-階梯情報",
-									"_offset":[4,0,4],
-									"_values":{
-										"0":"表示なし",
-										"1":"階梯1",
-										"2":"階梯2"
-									}
-								}
+						"_type":"idLength",
+						"HGEF":{
+							"_description":"入側POI-階梯情報",
+							"_offset":[0,0,4],
+							"_values":{
+								"0":"表示なし",
+								"1":"階梯1",
+								"2":"階梯2"
+							}
+						},
+						"DCBA":{
+							"_description":"出側POI-階梯情報",
+							"_offset":[4,0,4],
+							"_values":{
+								"0":"表示なし",
+								"1":"階梯1",
+								"2":"階梯2"
 							}
 						}
 					},
 					"fe":{
 						"_description":"事業者識別コード",
-						"_add":{
-							"unit":{
-								"_description":"事業者識別コード",
-								"H":{
-									"_description":"奇数偶数",
-									"_offset":[0,0,1],
-									"_values":{
-										"0":"番号ディジットの桁数が偶数",
-										"1":"番号ディジットの桁数が奇数"
-									}
-								},
-								"GFEDCBA":{
-									"_description":"予備",
-									"_offset":[1,0,7],
-									"_values":{
-										"00":"予備"
-									}
-								},
-								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+						"_type":"idLength",
+						"H":{
+							"_description":"奇数偶数",
+							"_offset":[0,0,1],
+							"_values":{
+								"0":"番号ディジットの桁数が偶数",
+								"1":"番号ディジットの桁数が奇数"
 							}
-						}
+						},
+						"GFEDCBA":{
+							"_description":"予備",
+							"_offset":[1,0,7],
+							"_values":{
+								"00":"予備"
+							}
+						},
+						"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
 					}
 				}
 			},
@@ -1257,77 +1231,65 @@
 					"_description":"事業者情報従属パラメータ名",
 					"fc":{
 						"_description":"POI-階梯情報",
-						"_add":{
-							"unit":{
-								"_description":"POI階梯情報",
-								"HGEF":{
-									"_description":"入側POI-階梯情報",
-									"_offset":[0,0,4],
-									"_values":{
-										"0":"表示なし",
-										"1":"階梯1",
-										"2":"階梯2"
-									}
-								},
-								"DCBA":{
-									"_description":"出側POI-階梯情報",
-									"_offset":[4,0,4],
-									"_values":{
-										"0":"表示なし",
-										"1":"階梯1",
-										"2":"階梯2"
-									}
-								}
+						"_type":"idLength",
+						"HGEF":{
+							"_description":"入側POI-階梯情報",
+							"_offset":[0,0,4],
+							"_values":{
+								"0":"表示なし",
+								"1":"階梯1",
+								"2":"階梯2"
+							}
+						},
+						"DCBA":{
+							"_description":"出側POI-階梯情報",
+							"_offset":[4,0,4],
+							"_values":{
+								"0":"表示なし",
+								"1":"階梯1",
+								"2":"階梯2"
 							}
 						}
 					},
 					"fd":{
 						"_description":"POI-料金区域情報",
-						"_add":{
-							"unit":{
-								"_description":"POI料金区域情報",
-								"H":{
-									"_description":"奇数偶数",
-									"_offset":[0,0,1],
-									"_values":{
-										"0":"番号ディジットの桁数が偶数",
-										"1":"番号ディジットの桁数が奇数"
-									}
-								},
-								"GFEDCBA":{
-									"_description":"予備",
-									"_offset":[1,0,7],
-									"_values":{
-										"00":"予備"
-									}
-								},
-								"~":{"_description":"情報","_offset":[0,0,-1],"_input":true,"_type":"num"}
+						"_type":"idLength",
+						"H":{
+							"_description":"奇数偶数",
+							"_offset":[0,0,1],
+							"_values":{
+								"0":"番号ディジットの桁数が偶数",
+								"1":"番号ディジットの桁数が奇数"
 							}
-						}
+						},
+						"GFEDCBA":{
+							"_description":"予備",
+							"_offset":[1,0,7],
+							"_values":{
+								"00":"予備"
+							}
+						},
+						"~":{"_description":"情報","_offset":[0,0,-1],"_input":true,"_type":"num"}
 					},
 					"fe":{
 						"_description":"事業者識別コード",
-						"_add":{
-							"unit":{
-								"_description":"事業者識別コード",
-								"H":{
-									"_description":"奇数偶数",
-									"_offset":[0,0,1],
-									"_values":{
-										"0":"番号ディジットの桁数が偶数",
-										"1":"番号ディジットの桁数が奇数"
-									}
-								},
-								"GFEDCBA":{
-									"_description":"予備",
-									"_offset":[1,0,7],
-									"_values":{
-										"00":"予備"
-									}
-								},
-								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+						"_type":"idLength",
+						"H":{
+							"_description":"奇数偶数",
+							"_offset":[0,0,1],
+							"_values":{
+								"0":"番号ディジットの桁数が偶数",
+								"1":"番号ディジットの桁数が奇数"
 							}
-						}
+						},
+						"GFEDCBA":{
+							"_description":"予備",
+							"_offset":[1,0,7],
+							"_values":{
+								"00":"予備"
+							}
+						},
+						"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
 					}
 				}
 			},
@@ -1336,77 +1298,66 @@
 					"_description":"事業者情報従属パラメータ名",
 					"fc":{
 						"_description":"POI-階梯情報",
-						"_add":{
-							"unit":{
-								"_description":"POI階梯情報",
-								"HGEF":{
-									"_description":"入側POI-階梯情報",
-									"_offset":[0,0,4],
-									"_values":{
-										"0":"表示なし",
-										"1":"階梯1",
-										"2":"階梯2"
-									}
-								},
-								"DCBA":{
-									"_description":"出側POI-階梯情報",
-									"_offset":[4,0,4],
-									"_values":{
-										"0":"表示なし",
-										"1":"階梯1",
-										"2":"階梯2"
-									}
-								}
+						"_type":"idLength",
+						"HGEF":{
+							"_description":"入側POI-階梯情報",
+							"_offset":[0,0,4],
+							"_values":{
+								"0":"表示なし",
+								"1":"階梯1",
+								"2":"階梯2"
+							}
+						},
+						"DCBA":{
+							"_description":"出側POI-階梯情報",
+							"_offset":[4,0,4],
+							"_values":{
+								"0":"表示なし",
+								"1":"階梯1",
+								"2":"階梯2"
 							}
 						}
 					},
 					"fd":{
 						"_description":"POI-料金区域情報",
-						"_add":{
-							"unit":{
-								"H":{
-									"_description":"奇数偶数",
-									"_offset":[0,0,1],
-									"_values":{
-										"0":"番号ディジットの桁数が偶数",
-										"1":"番号ディジットの桁数が奇数"
-									}
-								},
-								"GFEDCBA":{
-									"_description":"予備",
-									"_offset":[1,0,7],
-									"_values":{
-										"00":"予備"
-									}
-								},
-								"_description":"POI料金区域情報",
-								"~":{"_description":"情報","_offset":[0,0,-1],"_input":true,"_type":"num"}
+						"_type":"idLength",
+						"H":{
+							"_description":"奇数偶数",
+							"_offset":[0,0,1],
+							"_values":{
+								"0":"番号ディジットの桁数が偶数",
+								"1":"番号ディジットの桁数が奇数"
 							}
-						}
+						},
+						"GFEDCBA":{
+							"_description":"予備",
+							"_offset":[1,0,7],
+							"_values":{
+								"00":"予備"
+							}
+						},
+						"_description":"POI料金区域情報",
+						"~":{"_description":"情報","_offset":[0,0,-1],"_input":true,"_type":"num"}
 					},
 					"fe":{
 						"_description":"事業者識別コード",
-						"_add":{
-							"unit":{
-								"_description":"事業者識別コード",
-								"H":{
-									"_description":"奇数偶数",
-									"_offset":[0,0,1],
-									"_values":{
-										"0":"番号ディジットの桁数が偶数",
-										"1":"番号ディジットの桁数が奇数"
-									}
-								},
-								"GFEDCBA":{
-									"_description":"予備",
-									"_offset":[1,0,7],
-									"_values":{
-										"00":"予備"
-									}
-								},
-								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+						"_type":"idLength",
+						"H":{
+							"_description":"奇数偶数",
+							"_offset":[0,0,1],
+							"_values":{
+								"0":"番号ディジットの桁数が偶数",
+								"1":"番号ディジットの桁数が奇数"
 							}
-						}
+						},
+						"GFEDCBA":{
+							"_description":"予備",
+							"_offset":[1,0,7],
+							"_values":{
+								"00":"予備"
+							}
+						},
+						"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
 					}
 				}
 			}

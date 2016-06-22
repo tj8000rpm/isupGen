@@ -139,7 +139,18 @@ var addButtonEvent = function(obj,subField,select){
 					if(unitField==undefined){
 						unitField=document.createElement("div");
 						unitField.className="unit";
-						subField.appendChild(unitField);
+						if(type=="idLength"){
+							var lengthField=document.createElement("div");
+							var lengthLabel=document.createElement("label");
+							lengthField.className="length";
+							lengthField.value=key;
+							lengthLabel.textContent=target._description+":";
+							lengthField.appendChild(lengthLabel);
+							lengthField.appendChild(unitField);
+							subField.appendChild(lengthField);
+						}else{
+							subField.appendChild(unitField);
+						}
 					}
 					addMenu(target[key2],newid+","+key2,unitField);
 				}else{
