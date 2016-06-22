@@ -37,7 +37,7 @@ var selectParam = function(obj){
 
 	//設定項目が一つの場合
 	var selPrm = isupData[obj.value];
-	if(selPrm._values != undefined || selPrm._input){
+/*	if(selPrm._values != undefined || selPrm._input){
 		var field=document.createElement("p");
 		if(selPrm._input){
 			var inputObj=document.createElement("input");
@@ -59,7 +59,7 @@ var selectParam = function(obj){
 		subField.appendChild(field);
 	}
 	//設定項目が１つ以上の場合
-	else{
+	else{*/
 		var unitField=undefined;
 		for(var key in selPrm){
 			if(key!="_description" && key!="_add"){
@@ -78,7 +78,7 @@ var selectParam = function(obj){
 				subField.appendChild(field);
 			}
 		}
-	}
+//	}
 }
 
 var addOptions = function(sel,val,text){
@@ -93,10 +93,9 @@ var addMenu = function(target,paramId,subField){
 
 	field.appendChild(label);
 	label.textContent=target._description+":";
-	if(target._input || target._type=="pivot"){
+	if(target._input){
 		var inputObj=document.createElement("input");
-		if(target._type=="pivot")	inputObj.type="hidden";
-		else						inputObj.type="text";
+		inputObj.type="text";
 		inputObj.id=paramId;
 		field.appendChild(inputObj);
 	}else{
@@ -116,39 +115,30 @@ var addAddButton = function(target,rootDescription,id,subField,pivotid){
 	var label=document.createElement("label");
 	field.appendChild(label);
 	label.textContent=rootDescription+":";
-	if(pivotid!=undefined){
-		var hidden=document.createElement("input");
-		hidden.type="hidden";
-		hidden.id=pivotid;
-		field.appendChild(hidden);
-	}
+	
 	subField.appendChild(field);
+
+	var childLabel=document.createElement("select");
+	var addButton=document.createElement("input");
+	var delButton=document.createElement("input");
+	addButton.type="button";
+	delButton.type="button";
+	addButton.value="+";
+	delButton.value="-";
+	addButton.id=id+"_add";
+	addButton.onclick=function(){addButtonEvent(this,subField,childLabel);};
+
+	subField.appendChild(childLabel);
+	subField.appendChild(addButton);
+	subField.appendChild(delButton);
 	for(key in target){
 		if(key.match("^_.*$")) continue;
-		var childField=document.createElement("p");
-		var childLabel=document.createElement("label");
-		var addButton=document.createElement("input");
-		var delButton=document.createElement("input");
-	
-		childField.appendChild(childLabel);
-		childField.appendChild(addButton);
-		childField.appendChild(delButton);
-		childLabel.textContent=target[key]._description+":";
-		addButton.id=id+","+key+"_add";
-		addButton.onclick=function(){addButtonEvent(this,subField);};
-		delButton.id=id+","+key+"_del";
-		addButton.type="button";
-		delButton.type="button";
-		addButton.value="+";
-		delButton.value="-";
-		subField.appendChild(childField);
-		
+		addOptions(childLabel,id+","+key,target[key]._description);
 	}
 
 }
-var addButtonEvent = function(obj,subField){
-	var ids=obj.id.split(",");
-
+var addButtonEvent = function(obj,subField,select){
+	var ids= select.value.split(",");
 	var newid="";
 	var target=isupData;
 	for(var i=0;i<ids.length;i++){
@@ -168,10 +158,10 @@ var addButtonEvent = function(obj,subField){
 					field.className="length";
 					field.value=key;
 					subField.appendChild(field);
-					if(type=="pivot")
-						addAddButton(target[key2],target._description,newid+",_add",field,newid);
-					else
-						addAddButton(target[key2],target._description,newid+",_add",field);
+					//if(type=="pivot")
+					//	addAddButton(target[key2],target._description,newid+",_add",field,newid);
+					//else
+					addAddButton(target[key2],target._description,newid+",_add",field);
 				}else if(!key2.match("^_.*$")){
 					if(unitField==undefined){
 						unitField=document.createElement("div");
