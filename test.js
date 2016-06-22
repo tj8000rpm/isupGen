@@ -37,48 +37,24 @@ var selectParam = function(obj){
 
 	//設定項目が一つの場合
 	var selPrm = isupData[obj.value];
-/*	if(selPrm._values != undefined || selPrm._input){
-		var field=document.createElement("p");
-		if(selPrm._input){
-			var inputObj=document.createElement("input");
-			inputObj.type="text";
-			inputObj.id=obj.value;
-			field.appendChild(inputObj);
-		}
-		else{
-			var selectObj=document.createElement("select");
-			field.appendChild(selectObj);
-			selectObj.id=obj.value;
-//			for(key in selPrm._values){
-			var keys = Object.keys(selPrm._values).sort();
-			for(var i=0;i<keys.length;i++){
-				var key=keys[i];
-				addOptions(selectObj,key,"("+key+")"+selPrm._values[key],subField);
+	var unitField=undefined;
+	for(var key in selPrm){
+		if(key!="_description" && key!="_add"){
+			if(unitField==undefined){
+				unitField=document.createElement("div");
+				unitField.className="unit";
+				subField.appendChild(unitField);
 			}
+			addMenu(selPrm[key],paramHex+","+key,unitField);
 		}
-		subField.appendChild(field);
+		else if(key=="_add"){
+			addAddButton(selPrm[key],selPrm[key]._description,paramHex+","+key,subField);
+			var field=document.createElement("p");
+			var line=document.createElement("hr");
+			field.appendChild(line);
+			subField.appendChild(field);
+		}
 	}
-	//設定項目が１つ以上の場合
-	else{*/
-		var unitField=undefined;
-		for(var key in selPrm){
-			if(key!="_description" && key!="_add"){
-				if(unitField==undefined){
-					unitField=document.createElement("div");
-					unitField.className="unit";
-					subField.appendChild(unitField);
-				}
-				addMenu(selPrm[key],paramHex+","+key,unitField);
-			}
-			else if(key=="_add"){
-				addAddButton(selPrm[key],selPrm[key]._description,paramHex+","+key,subField);
-				var field=document.createElement("p");
-				var line=document.createElement("hr");
-				field.appendChild(line);
-				subField.appendChild(field);
-			}
-		}
-//	}
 }
 
 var addOptions = function(sel,val,text){
@@ -158,9 +134,6 @@ var addButtonEvent = function(obj,subField,select){
 					field.className="length";
 					field.value=key;
 					subField.appendChild(field);
-					//if(type=="pivot")
-					//	addAddButton(target[key2],target._description,newid+",_add",field,newid);
-					//else
 					addAddButton(target[key2],target._description,newid+",_add",field);
 				}else if(!key2.match("^_.*$")){
 					if(unitField==undefined){
@@ -195,8 +168,8 @@ var getSubResult = function(tag){
 			}
 		}
 		
-		result=("00"+Number(result.length/2).toString(16)).slice(-2)+result;
-		result=("00"+divId).slice(-2)+result;
+		result=zeroPadding(dec2hex(result.length/2),2)+result;
+		result=zeroPadding(divId,2)+result;
 
 	}else if(divClass=="unit"){
 		result=createUnitSignal(tag);
@@ -256,7 +229,7 @@ var createUnitSignal = function(tag){
 
 			//hex文字列をバイナリ文字列に変換する
 			for(c in newval){
-				var digit=("0000"+Number("0x"+newval[c]).toString(2)).slice(-4);
+				var digit=zeroPadding(hex2bin(newval[c]),4);
 				binStr+=digit;
 			}
 
@@ -267,7 +240,7 @@ var createUnitSignal = function(tag){
 				newval=newval+val[c];
 			}
 			for(c in newval){
-				var digit=("0000"+Number("0x"+newval[c]).toString(2)).slice(-4);
+				var digit=zeroPadding(hex2bin(newval[c]),4);
 				binStr+=digit;
 			}
 		}else if(target._type=="bin"){
@@ -279,7 +252,8 @@ var createUnitSignal = function(tag){
 				binStr+="0";
 			}
 
-			var binVal=("00000000"+Number(val).toString(2)).slice(-l);
+			var binVal;
+			binVal=zeroPadding(dec2bin(val),l);
 
 			binStr=binStr.substr(0,x+y*8)+binVal+binStr.substr(x+y*8+l,binStr.length-x+y*8+l);
 		}else{
@@ -296,7 +270,7 @@ var createUnitSignal = function(tag){
 			}
 
 			//0埋めする
-			binVal=("00000000"+Number("0x"+val).toString(2)).slice(l*-1);
+			binVal=zeroPadding(hex2bin(val),l);
 			
 			//offsetの指示に従い間に埋め込む、置き換える
 			binStr=binStr.substr(0,x+y*8)+binVal+binStr.substr(x+y*8+l,binStr.length-x+y*8+l);
@@ -331,22 +305,26 @@ var createSignal = function(){
 	var result="";
 
 	result=getSubResult(field);
-	/*
-	for(var i=0;i<childlen.length;i++){
-		var tag=childlen[i];
-		if(tag.tagName.search("^[dD][iI][vV]$")!=-1){
-			result+=getSubResult(tag);
-		}
-	}
-*/
-	//console.log(result);
+	
 	// 信号単体を出力
-	//result1.value=result;
 	result1.value=result.slice(-(result.length-4));
 	// パラメータ番号とパラメータレングスをつけて出力
-	//result2.value=paramNo+("0"+(result.length/2).toString(16)).slice(-2)+result;
 	result2.value=result;
 	result1.size=result2.value.length*1.5;
 	result2.size=result2.value.length*1.5;
 }
 
+var zeroPadding = function(str,len){
+	for(var i=0;i<len;i++) str=0+str;
+	return str.slice(-len);
+}
+
+var hex2bin = function(str){
+	return Number("0x"+str).toString(2);
+}
+var dec2bin = function(num){
+	return Number(num).toString(2);
+}
+var dec2hex = function(num){
+	return Number(num).toString(16);
+}
