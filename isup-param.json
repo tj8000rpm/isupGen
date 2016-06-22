@@ -7,10 +7,6 @@
 		}
 	},
 
-	"01":{
-		"_description":"呼番号(国内用)"
-	},
-
 	"02":{
 		"_description":"通信路要求表示",
 		"A":{"_description":"通信路要求表示", "_offset":[0,0,8],
@@ -57,12 +53,14 @@
 
 	"03":{
 		"_description":"アクセス転送",
-		"_offset":[0,0,-1],
-		"isVariableLength":true,
-		"fillZero":true,
-		"_type":"raw",
-		"_input":true,
-		"length":0
+		"A":{
+			"_description":"アクセス転送", "_offset":[0,0,-1],
+			"isVariableLength":true,
+			"fillZero":true,
+			"_type":"raw",
+			"_input":true,
+			"length":0
+		}
 	},
 
 	"04":{
@@ -211,29 +209,30 @@
 
 	"09":{
 		"_description":"発ユーザ種別",
-		"_offset":[0,0,8],
-		"_values":{
-			"00":"発ユーザ種別不明",
-			"01":"台、フランス語",
-			"02":"台、英語",
-			"03":"台、ドイツ語",
-			"04":"台、ロシア語",
-			"05":"台、スペイン語",
-			"06":"相互協定によって結ばれた特定の言語を管理するために利用",
-			"07":"相互協定によって結ばれた特定の言語を管理するために利用",
-			"08":"相互協定によって結ばれた特定の言語を管理するために利用",
-			"09":"国内台(ITU-T 勧告 Q.104参照)(注)(国内用)",
-			"0a":"一般発ユーザ",
-			"0b":"優先発ユーザ",
-			"0c":"データ呼(音声帯域データ)",
-			"0d":"試験呼",
-			"0e":"予備",
-			"0f":"公衆電話",
-			"10":"予備",
-			"df":"予備",
-			"e0":"国内用として留保",
-			"fe":"国内用として留保",
-			"ff":"予備"
+		"A":{ "_description":"発ユーザ種別", "_offset":[0,0,8],
+			"_values":{
+				"00":"発ユーザ種別不明",
+				"01":"台、フランス語",
+				"02":"台、英語",
+				"03":"台、ドイツ語",
+				"04":"台、ロシア語",
+				"05":"台、スペイン語",
+				"06":"相互協定によって結ばれた特定の言語を管理するために利用",
+				"07":"相互協定によって結ばれた特定の言語を管理するために利用",
+				"08":"相互協定によって結ばれた特定の言語を管理するために利用",
+				"09":"国内台(ITU-T 勧告 Q.104参照)(注)(国内用)",
+				"0a":"一般発ユーザ",
+				"0b":"優先発ユーザ",
+				"0c":"データ呼(音声帯域データ)",
+				"0d":"試験呼",
+				"0e":"予備",
+				"0f":"公衆電話",
+				"10":"予備",
+				"df":"予備",
+				"e0":"国内用として留保",
+				"fe":"国内用として留保",
+				"ff":"予備"
+			}
 		}
 	},
 
@@ -378,16 +377,9 @@
 		"~":{"_description":"アドレス情報","_offset":[0,2,-1],"_type":"num","fillZero":true,"_input":true}
 	},
 
-	"0d":{ "_description":"接続要求" },
-
-	"0e":{ "_description":"情報要求表示(国内用)" },
-	
-	"0f":{ "_description":"情報表示(国内用)" },
-
 	"10":{
 		"_description":"導通表示",
-		"A":{"_description":"導通表示",
-			"_offset":[7,0,1],
+		"A":{"_description":"導通表示", "_offset":[7,0,1],
 			"_values":{"0":"導通不良","1":"導通良好"}
 		},
 		"B":{"_description":"予備","_offset":[0,0,7],"_values":{"0":"予備"}}
@@ -464,10 +456,10 @@
 			"_offset":[0,1,2],
 			"_description":"SCCP法表示",
 			"_values":{
-				"0":"表示なし",
-				"1":"コネクションレス法が利用できる(国内用)",
-				"2":"コネクション・オリエンテッド法が利用できる",
-				"3":"コネクションレス法とコネクション・オリエンテッド法が利用できる(国内用)"
+				"00":"表示なし",
+				"01":"コネクションレス法が利用できる(国内用)",
+				"02":"コネクション・オリエンテッド法が利用できる",
+				"03":"コネクションレス法とコネクション・オリエンテッド法が利用できる(国内用)"
 			}
 		}
 	},
@@ -475,22 +467,22 @@
 	"12":{ "_description":"理由表示",
 		"DCBA":{"_description":"生成源","_offset":[4,0,4],
 			"_values":{
-				"0":"ユーザ(U)",
-				"1":"ローカルユーザ収容私設備(自分側)(LPN)",
-				"2":"ローカルユーザ収容公衆網(自分側)(LN)",
-				"3":"中継網(TN)",
-				"4":"リモートユーザ収容公衆網(相手側)(RLN)",
-				"5":"リモートユーザ収容私設備(相手側)(RPN)",
-				"7":"国際網(INTL)",
-				"10":"インターワーキング先の網(BI)"
+				"00":"ユーザ(U)",
+				"01":"ローカルユーザ収容私設備(自分側)(LPN)",
+				"02":"ローカルユーザ収容公衆網(自分側)(LN)",
+				"03":"中継網(TN)",
+				"04":"リモートユーザ収容公衆網(相手側)(RLN)",
+				"05":"リモートユーザ収容私設備(相手側)(RPN)",
+				"07":"国際網(INTL)",
+				"0a":"インターワーキング先の網(BI)"
 			}
 		},
 		"E":{"_description":"予備","_offset":[3,0,1],"_values":{"0":"予備"}},
 		"GF":{"_description":"コーディング標準","_offset":[1,0,2],
 			"_values":{"0":"ITU-T標準およびTTC標準"
-				,"1":"ISO/IEC標準"
-				,"2":"国内標準"
-				,"3":"生成源で定義された標準"
+				,"01":"ISO/IEC標準"
+				,"02":"国内標準"
+				,"03":"生成源で定義された標準"
 			}
 		},
 		"H":{"_description":"拡張","_offset":[0,0,1],
@@ -624,10 +616,6 @@
 		"HGFEDC":{"_description":"予備","_offset":[0,0,6],"_values":{"0":"予備"}}
 	},
 
-	"16":{ "_description":"範囲と状態"},
-	"18":{ "_description":"ファシリティ表示"},
-	"1a":{ "_description":"閉域接続インターロックコード"},
-
 
 	"1d":"作成中",
 	"1d":{ "_description":"ユーザサービス情報",
@@ -685,11 +673,7 @@
 		}
 	},
 
-
-	"1e":{ "_description":"信号局コード(国内用)", "_input":true,"_type":"raw" },
-
-
-	"20":{ "_description":"ユーザ・ユーザ情報", "_input":true,"_type":"raw" },
+	"20":{ "_description":"ユーザ・ユーザ情報", "A":{"_description":"ユーザ・ユーザ情報", "_input":true,"_type":"raw" }},
 	
 	"21":{ "_description":"接続先番号",
 		"H":{
@@ -793,11 +777,6 @@
 		}
 	},
 
-	"25":{ "_description":"回線割当マップ","_input":true,"_type":"raw"},
-	"26":{ "_description":"回線状態表示(国内用)","_input":true,"_type":"raw"},
-
-	"27":{ "_description":"自動輻輳レベル","_offset":[0,0,8],"_values":{"1":"輻輳レベル1","2":"輻輳レベル2"}},
-
 	"28":{ "_description":"第一着番号",
 		"H":{
 			"_description":"奇数偶数",
@@ -878,75 +857,8 @@
 	},
 
 
-	"2b":{ "_description":"発側ISC局コード","_offset":[0,0,-1],"_input":true,"_type":"raw"},
 
-
-	"2c":{ "_description":"汎用通知識別子",
-		"GFEDCBA":{"_description":"通知識別子","_offset":[1,0,7],
-			"_values":{
-				 "00":"ユーザ中断"
-				,"01":"ユーザ再開"
-				,"02":"ベアラサービス変更"
-				,"03":"ASN.1コーディング拡張のための識別"
-				,"04":"呼完結遅延"
-				,"42":"会議電話開始"
-				,"43":"会議電話終了"
-				,"44":"他のユーザ参加"
-				,"45":"呼孤立"
-				,"46":"再接続"
-				,"47":"他のユーザ孤立"
-				,"48":"他のユーザ再接続"
-				,"49":"他のユーザ分離"
-				,"4a":"他のユーザ切断"
-				,"4b":"会議電話フローティング"
-				,"60":"呼は待機中の呼である"
-				,"68":"着信転送起動中"
-				,"69":"呼転送、呼び出し中"
-				,"6a":"呼転送、通信中"
-				,"79":"相手保留"
-				,"7a":"相手保留解除"
-				,"7b":"呼は転送される"
-			}
-		},
-		"H":{"_description":"拡張","_offset":[0,1,1],
-			"_values":{"0":"次のオクテットに続く","1":"最終オクテット"}
-		}
-	},
-
-	"2d":{ "_description":"呼履歴情報","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-
-	"2e":{ "_description":"アクセス配送情報",
-		"A":{
-			"_description":"アクセス配送表示","_offset":[0,0,8],
-			"_values":{"0":"呼設定メッセージ送出","1":"呼設定メッセージ送出なし"}
-		}
-	},
-
-	"2f":{ "_description":"網特有ファシリティ(国内用)","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"30":{ "_description":"ユーザサービス情報プライム","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"31":{ "_description":"伝播遅延カウンタ","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-
-	"32":{ "_description":"リモートオペレーション(国内用)","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"33":{ "_description":"サービス活性化(国内用)","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"34":{ "_description":"ユーザテレサービス情報","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"35":{ "_description":"使用通信路","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"36":{ "_description":"呼転送情報","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"37":{ "_description":"エコー制御情報","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"38":{ "_description":"メッセージコンパチビリティ情報","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"39":{ "_description":"パラメータコンパチビリティ情報","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"3a":{ "_description":"MLPP優先","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"3b":{ "_description":"MCID要求表示","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"3c":{ "_description":"MCID応答表示","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"3d":{ "_description":"ホップカウンタ","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"3e":{ "_description":"通信路要求プライム","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"3f":{ "_description":"位置番号","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"40":{ "_description":"転送先番号制限","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"43":{ "_description":"コールトランスファ参照","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"44":{ "_description":"ループ抑止表示","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"45":{ "_description":"コールトランスファ番号","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"4b":{ "_description":"CCSS","_offset":[0,0,-1],"_input":true,"_type":"raw","offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"4c":{ "_description":"順方向GVNS","_offset":[0,0,-1],"_input":true,"_type":"raw","offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"4d":{ "_description":"逆方向GVNS","_offset":[0,0,-1],"_input":true,"_type":"raw","offset":[0,0,-1],"_input":true,"_type":"raw"},
+	"2f":{ "_description":"網特有ファシリティ(国内用)","A":{"_description":"網特有ファシリティ(国内用)","_offset":[0,0,-1],"_input":true,"_type":"raw"}},
 
 	"4e":{ "_description":"リダイレクション能力(国内用)",
 		"CBA":{"_description":"リダイレクション可能表示","_offset":[5,0,3],
@@ -957,12 +869,9 @@
 			"_values":{"1":"最終オクテット"}
 		}
 	},
-	"5b":{ "_description":"網管理制御","_offset":[0,0,-1],"_input":true,"_type":"raw"},
 
-	"65":{ "_description":"相関id","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"66":{ "_description":"SCFid","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-
-	"6e":{ "_description":"呼転送処理表示","_offset":[0,0,-1],"_input":true,"_type":"raw"},
+	"65":{ "_description":"相関id","~":{"_description":"相関id","_offset":[0,0,-1],"_input":true,"_type":"raw"}},
+	"66":{ "_description":"SCFid","~":{"_description":"SCFid","_offset":[0,0,-1],"_input":true,"_type":"raw"}},
 
 	"6f":{ "_description":"着IN番号",
 		"H":{
@@ -1013,24 +922,10 @@
 		"~":{"_description":"アドレス情報","_offset":[0,3,-1],"_type":"num","fillZero":true,"_input":true}
 	},
 
-	"70":{ "_description":"呼提供処理表示","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"71":{ "_description":"課金ユーザ表示(国内用)","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"72":{ "_description":"会議電話処理表示","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"73":{ "_description":"表示情報","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"74":{ "_description":"UID動作表示","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-	"75":{ "_description":"UID能力表示","_offset":[0,0,-1],"_input":true,"_type":"raw"},
-
 	"77":{ "_description":"リダイレクション回数(国内用)",
 		"EDCBA":{"_description":"リダイレクション回数","_offset":[3,0,5],"_input":"true","_type":"bin"
 		}
 	},
-
-	"78":{ "_description":"アプリケーション転送"},
-	"79":{ "_description":"コレクトコール要求"},
-	"7a":{ "_description":"CCNR可能表示"},
-	"7b":{ "_description":"ピボット能力"},
-	"7c":{ "_description":"ピボットルーティング表示"},
-
 
 	"7d":{ "_description":"着ディレクトリ番号(国内用)",
 		"H":{
@@ -1076,18 +971,6 @@
 		"LKJI":{"_description":"予備","_offset":[4,1,4],"_values":{"0":"予備"}},
 		"~":{"_description":"アドレス情報","_offset":[0,2,-1],"_type":"num","fillZero":true,"_input":true}
 	},
-
-	"7f":{ "_description":"第一着IN番号"},
-	"81":{ "_description":"発測地位置"},
-	"82":{ "_description":"HTR情報"},
-	"83":{ "_description":"発測地速度情報"},
-	"84":{ "_description":"ネットワークルーチング番号(国内用)"},
-	"85":{ "_description":"クエリーオンリリース能力(網オプション)"},
-	"86":{ "_description":"ピボット状態表示(国内用)"},
-	"87":{ "_description":"ピボットルーティング回数"},
-	"88":{ "_description":"ピボットルーティング順方向情報"},
-	"89":{ "_description":"ピボットルーティング逆方向情報"},
-	"8a":{ "_description":"リダイレクション状態表示(国内用)"},
 
 	"8b":{ "_description":"リダイレクション順方向情報(国内用)",
 		"_add":{"_description":"情報種別識別子","_autoLength":true,
@@ -1165,37 +1048,373 @@
 			}
 		}
 	},
-	"8d":{ "_description":"番号ポータビリティ順方向情報(網オプション)"},
+
 	"c0":{ "_description":"汎用番号"},
-	"c1":{ "_description":"汎用ディジット(国内用)"},
+
 	"d7":{ "_description":"緊急通報呼表示"},
+
 	"f0":{ "_description":"輻輳制御済み通知情報"},
 
 	"f1":{ "_description":"事業者情報転送",
-		"_add":{"_description":"abc",
-			"5":{"_description":"cvd",
+		"_add":{"_description":"事業者情報名",
+			"f8":{"_description":"移転元SCP事業者情報",
 				"_add":{
-					"8":{"_description":"888",
+					"_description":"事業者情報従属パラメータ名",
+					"fe":{
+						"_description":"事業者識別コード",
 						"_add":{
-							"9":{"_description":"999",
-								"aaa":{"_description":"!!",
+							"unit":{
+								"_description":"事業者識別コード",
+								"H":{
+									"_description":"奇数偶数",
+									"_offset":[0,0,1],
 									"_values":{
-										"1":"abc",
-										"2":"def"
+										"0":"番号ディジットの桁数が偶数",
+										"1":"番号ディジットの桁数が奇数"
 									}
 								},
-								"bbb":{"_description":"??",
+								"GFEDCBA":{
+									"_description":"予備",
+									"_offset":[1,0,7],
 									"_values":{
-										"1":"abc",
-										"2":"def"
+										"00":"予備"
+									}
+								},
+								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+							}
+						}
+					}
+				}
+			},
+			"f9":{"_description":"移転先SCP事業者情報" ,
+				"_add":{
+					"_description":"事業者情報従属パラメータ名",
+					"fe":{
+						"_description":"事業者識別コード",
+						"_add":{
+							"unit":{
+								"_description":"事業者識別コード",
+								"H":{
+									"_description":"奇数偶数",
+									"_offset":[0,0,1],
+									"_values":{
+										"0":"番号ディジットの桁数が偶数",
+										"1":"番号ディジットの桁数が奇数"
+									}
+								},
+								"GFEDCBA":{
+									"_description":"予備",
+									"_offset":[1,0,7],
+									"_values":{
+										"00":"予備"
+									}
+								},
+								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+							}
+						}
+					}
+				}
+			},
+			"fa":{"_description":"SCP事業者情報",
+				"_add":{
+					"_description":"事業者情報従属パラメータ名",
+					"fe":{
+						"_description":"事業者識別コード",
+						"_add":{
+							"unit":{
+								"_description":"事業者識別コード",
+								"H":{
+									"_description":"奇数偶数",
+									"_offset":[0,0,1],
+									"_values":{
+										"0":"番号ディジットの桁数が偶数",
+										"1":"番号ディジットの桁数が奇数"
+									}
+								},
+								"GFEDCBA":{
+									"_description":"予備",
+									"_offset":[1,0,7],
+									"_values":{
+										"00":"予備"
+									}
+								},
+								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+							}
+						}
+					}
+				}
+			},
+			"fb":{"_description":"発事業者情報",
+				"_add":{
+					"_description":"事業者情報従属パラメータ名",
+					"fc":{
+						"_description":"POI-階梯情報",
+						"_add":{
+							"unit":{
+								"HGEF":{
+									"_description":"入側POI-階梯情報",
+									"_offset":[0,0,4],
+									"_values":{
+										"0":"表示なし",
+										"1":"階梯1",
+										"2":"階梯2"
+									}
+								},
+								"DCBA":{
+									"_description":"出側POI-階梯情報",
+									"_offset":[4,0,4],
+									"_values":{
+										"0":"表示なし",
+										"1":"階梯1",
+										"2":"階梯2"
 									}
 								}
+							}
+						}
+					},
+					"fe":{
+						"_description":"事業者識別コード",
+						"_add":{
+							"unit":{
+								"H":{
+									"_description":"奇数偶数",
+									"_offset":[0,0,1],
+									"_values":{
+										"0":"番号ディジットの桁数が偶数",
+										"1":"番号ディジットの桁数が奇数"
+									}
+								},
+								"GFEDCBA":{
+									"_description":"予備",
+									"_offset":[1,0,7],
+									"_values":{
+										"00":"予備"
+									}
+								},
+								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+							}
+						}
+					}
+				}
+			},
+			"fc":{"_description":"着事業者情報",
+				"_add":{
+					"_description":"事業者情報従属パラメータ名",
+					"fc":{
+						"_description":"POI-階梯情報",
+						"_add":{
+							"unit":{
+								"_description":"POI階梯情報",
+								"HGEF":{
+									"_description":"入側POI-階梯情報",
+									"_offset":[0,0,4],
+									"_values":{
+										"0":"表示なし",
+										"1":"階梯1",
+										"2":"階梯2"
+									}
+								},
+								"DCBA":{
+									"_description":"出側POI-階梯情報",
+									"_offset":[4,0,4],
+									"_values":{
+										"0":"表示なし",
+										"1":"階梯1",
+										"2":"階梯2"
+									}
+								}
+							}
+						}
+					},
+					"fe":{
+						"_description":"事業者識別コード",
+						"_add":{
+							"unit":{
+								"_description":"事業者識別コード",
+								"H":{
+									"_description":"奇数偶数",
+									"_offset":[0,0,1],
+									"_values":{
+										"0":"番号ディジットの桁数が偶数",
+										"1":"番号ディジットの桁数が奇数"
+									}
+								},
+								"GFEDCBA":{
+									"_description":"予備",
+									"_offset":[1,0,7],
+									"_values":{
+										"00":"予備"
+									}
+								},
+								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+							}
+						}
+					}
+				}
+			},
+			"fd":{"_description":"選択中継事業者情報",
+				"_add":{
+					"_description":"事業者情報従属パラメータ名",
+					"fc":{
+						"_description":"POI-階梯情報",
+						"_add":{
+							"unit":{
+								"_description":"POI階梯情報",
+								"HGEF":{
+									"_description":"入側POI-階梯情報",
+									"_offset":[0,0,4],
+									"_values":{
+										"0":"表示なし",
+										"1":"階梯1",
+										"2":"階梯2"
+									}
+								},
+								"DCBA":{
+									"_description":"出側POI-階梯情報",
+									"_offset":[4,0,4],
+									"_values":{
+										"0":"表示なし",
+										"1":"階梯1",
+										"2":"階梯2"
+									}
+								}
+							}
+						}
+					},
+					"fd":{
+						"_description":"POI-料金区域情報",
+						"_add":{
+							"unit":{
+								"_description":"POI料金区域情報",
+								"H":{
+									"_description":"奇数偶数",
+									"_offset":[0,0,1],
+									"_values":{
+										"0":"番号ディジットの桁数が偶数",
+										"1":"番号ディジットの桁数が奇数"
+									}
+								},
+								"GFEDCBA":{
+									"_description":"予備",
+									"_offset":[1,0,7],
+									"_values":{
+										"00":"予備"
+									}
+								},
+								"~":{"_description":"情報","_offset":[0,0,-1],"_input":true,"_type":"num"}
+							}
+						}
+					},
+					"fe":{
+						"_description":"事業者識別コード",
+						"_add":{
+							"unit":{
+								"_description":"事業者識別コード",
+								"H":{
+									"_description":"奇数偶数",
+									"_offset":[0,0,1],
+									"_values":{
+										"0":"番号ディジットの桁数が偶数",
+										"1":"番号ディジットの桁数が奇数"
+									}
+								},
+								"GFEDCBA":{
+									"_description":"予備",
+									"_offset":[1,0,7],
+									"_values":{
+										"00":"予備"
+									}
+								},
+								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
+							}
+						}
+					}
+				}
+			},
+			"fe":{"_description":"経由事業者情報",
+				"_add":{
+					"_description":"事業者情報従属パラメータ名",
+					"fc":{
+						"_description":"POI-階梯情報",
+						"_add":{
+							"unit":{
+								"_description":"POI階梯情報",
+								"HGEF":{
+									"_description":"入側POI-階梯情報",
+									"_offset":[0,0,4],
+									"_values":{
+										"0":"表示なし",
+										"1":"階梯1",
+										"2":"階梯2"
+									}
+								},
+								"DCBA":{
+									"_description":"出側POI-階梯情報",
+									"_offset":[4,0,4],
+									"_values":{
+										"0":"表示なし",
+										"1":"階梯1",
+										"2":"階梯2"
+									}
+								}
+							}
+						}
+					},
+					"fd":{
+						"_description":"POI-料金区域情報",
+						"_add":{
+							"unit":{
+								"H":{
+									"_description":"奇数偶数",
+									"_offset":[0,0,1],
+									"_values":{
+										"0":"番号ディジットの桁数が偶数",
+										"1":"番号ディジットの桁数が奇数"
+									}
+								},
+								"GFEDCBA":{
+									"_description":"予備",
+									"_offset":[1,0,7],
+									"_values":{
+										"00":"予備"
+									}
+								},
+								"_description":"POI料金区域情報",
+								"~":{"_description":"情報","_offset":[0,0,-1],"_input":true,"_type":"num"}
+							}
+						}
+					},
+					"fe":{
+						"_description":"事業者識別コード",
+						"_add":{
+							"unit":{
+								"_description":"事業者識別コード",
+								"H":{
+									"_description":"奇数偶数",
+									"_offset":[0,0,1],
+									"_values":{
+										"0":"番号ディジットの桁数が偶数",
+										"1":"番号ディジットの桁数が奇数"
+									}
+								},
+								"GFEDCBA":{
+									"_description":"予備",
+									"_offset":[1,0,7],
+									"_values":{
+										"00":"予備"
+									}
+								},
+								"~":{"_description":"コード","_offset":[0,0,-1],"_input":true,"_type":"num"}
 							}
 						}
 					}
 				}
 			}
-		}
+		},
+		"BA":{"_description":"経由情報転送表示","_offset":[6,0,2],
+				"_values":{"0":"転送なし","1":"順方向","2":"逆方向","3":"両方向"}
+		},
+		"HGFEDC":{"_description":"予備","_offset":[0,0,6],"_values":{"0":"予備"}}
 	},
 	
 	"f2":{ "_description":"課金情報遅延(注)"},
@@ -1203,11 +1422,9 @@
 	"f4":{ "_description":"国内用リダイレクション理由"},
 	"f5":{ "_description":"発信者番号非通知理由"},
 	"f6":{ "_description":"PHS端末識別番号"},
-	"f7":{ "_description":"移動通信用呼番号"},
 	"f8":{ "_description":"移動通信用エンド情報転送"},
 	"f9":{ "_description":"契約者番号"},
 	"fa":{ "_description":"課金情報種別"},
 	"fb":{ "_description":"課金情報"},
-	"fd":{ "_description":"料金区域情報"},
-	"fe":{ "_description":"網機能種別"}
+	"fd":{ "_description":"料金区域情報"}
 }
