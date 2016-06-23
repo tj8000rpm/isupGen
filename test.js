@@ -24,43 +24,63 @@ var htmlInitation = function(){
 
 var selectParam = function(obj){
 	var paramHex=obj.value;
-	var subField=document.getElementById("sigField");
-	var result=[document.getElementById("result1"),document.getElementById("result2")];
-	subField.textContent=null;
-	result[0].value="";
-	result[1].value="";
-	result[0].size=20;
-	result[1].size=20;
 
-	subField.value=paramHex;
-	subField.className="length";
-
-	//設定項目が一つの場合
-	var selPrm = isupData[obj.value];
-	var unitField=undefined;
-	for(var key in selPrm){
-		if(key!="_description" && key!="_add"){
-			if(unitField==undefined){
-				unitField=document.createElement("div");
-				unitField.className="unit";
-				subField.appendChild(unitField);
-			}
-			addMenu(selPrm[key],paramHex+","+key,unitField);
-		}
-		else if(key=="_add"){
-			addAddButton(selPrm[key],selPrm[key]._description,paramHex+","+key,subField);
-			var field=document.createElement("p");
-			var line=document.createElement("hr");
-			field.appendChild(line);
-			subField.appendChild(field);
+	var selectIds=[];
+	for(var option in obj.options){
+		if(obj[option].selected){
+			selectIds.push(obj[option].value);
 		}
 	}
-}
 
+	var subField=document.getElementById("subField");
+	subField.textContent="";
+
+	var i=0;
+	for(var idx=0;idx<selectIds.length;idx++){
+		paramHex=selectIds[idx];
+		var sigField=document.createElement("div");
+
+		sigField.className="length";
+		sigField.id="sigField"+(i++);
+		subField.appendChild(sigField);
+		
+		var result=[document.getElementById("result1"),document.getElementById("result2")];
+		sigField.textContent=null;
+		result[0].value="";
+		result[1].value="";
+		result[0].size=20;
+		result[1].size=20;
+		
+			sigField.value=paramHex;
+			sigField.className="length";
+		
+			//設定項目が一つの場合
+			var selPrm = isupData[paramHex];
+			var unitField=undefined;
+	    	for(var key in selPrm){
+				if(key!="_description" && key!="_add"){
+					if(unitField==undefined){
+	    				unitField=document.createElement("div");
+						unitField.className="unit";
+						sigField.appendChild(unitField);
+					}
+					addMenu(selPrm[key],paramHex+","+key,unitField);
+				}
+				else if(key=="_add"){
+					addAddButton(selPrm[key],selPrm[key]._description,paramHex+","+key,sigField);
+					var field=document.createElement("p");
+					var line=document.createElement("hr");
+					field.appendChild(line);
+					sigField.appendChild(field);
+				}
+			}
+		}
+}   	
+    	
 var addOptions = function(sel,val,text){
-	len=sel.length++;
-	sel.options[len].value=val;
-	sel.options[len].text=text;
+		len=sel.length++;
+		sel.options[len].value=val;
+		sel.options[len].text=text;
 }
 
 var addMenu = function(target,paramId,subField){
@@ -311,11 +331,13 @@ var createUnitSignal = function(tag){
 var createSignal = function(){
 	var result1=document.getElementById("result1");
 	var result2=document.getElementById("result2");
-	var field=document.getElementById("sigField");
+	var field=document.getElementById("subField");
 	var childlen=field.childNodes;
 	var result="";
 
-	result=getSubResult(field);
+	for(var i=0;i<childlen.length;i++)
+	//	console.log(childlen[i]);
+		result+=getSubResult(childlen[i]);
 	
 	// 信号単体を出力
 	result1.value=result.slice(-(result.length-4));
