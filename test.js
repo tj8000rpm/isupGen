@@ -39,10 +39,6 @@ var selectParam = function(obj){
 	for(var idx=0;idx<selectIds.length;idx++){
 		paramHex=selectIds[idx];
 		var sigField=document.createElement("div");
-
-		sigField.className="length";
-		sigField.id="sigField"+(i++);
-		subField.appendChild(sigField);
 		
 		var result=[document.getElementById("result1"),document.getElementById("result2")];
 		sigField.textContent=null;
@@ -51,30 +47,38 @@ var selectParam = function(obj){
 		result[0].size=20;
 		result[1].size=20;
 		
-			sigField.value=paramHex;
-			sigField.className="length";
+		sigField.value=paramHex;
+		sigField.className="length";
+		sigField.id="sigField"+(i++);
+
+		var selPrm = isupData[paramHex];
+		var unitField=undefined;
+
+		var label=document.createElement("label");
+		label.textContent=selPrm._description+":";
+		label.className="bold";
+		subField.appendChild(sigField);
+		sigField.appendChild(label);
 		
-			//設定項目が一つの場合
-			var selPrm = isupData[paramHex];
-			var unitField=undefined;
-	    	for(var key in selPrm){
-				if(key!="_description" && key!="_add"){
-					if(unitField==undefined){
-	    				unitField=document.createElement("div");
-						unitField.className="unit";
-						sigField.appendChild(unitField);
-					}
-					addMenu(selPrm[key],paramHex+","+key,unitField);
+		//設定項目が一つの場合
+	    for(var key in selPrm){
+			if(key!="_description" && key!="_add"){
+				if(unitField==undefined){
+	    			unitField=document.createElement("div");
+					unitField.className="unit";
+					sigField.appendChild(unitField);
 				}
-				else if(key=="_add"){
-					addAddButton(selPrm[key],selPrm[key]._description,paramHex+","+key,sigField);
-					var field=document.createElement("p");
-					var line=document.createElement("hr");
-					field.appendChild(line);
-					sigField.appendChild(field);
-				}
+				addMenu(selPrm[key],paramHex+","+key,unitField);
+			}
+			else if(key=="_add"){
+				addAddButton(selPrm[key],selPrm[key]._description,paramHex+","+key,sigField);
+				var field=document.createElement("p");
+				var line=document.createElement("hr");
+				field.appendChild(line);
+				sigField.appendChild(field);
 			}
 		}
+	}
 }   	
     	
 var addOptions = function(sel,val,text){
