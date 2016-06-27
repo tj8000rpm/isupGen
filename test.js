@@ -48,17 +48,19 @@ var selectParam = function(obj){
 		result[1].size=20;
 		
 		sigField.value=paramHex;
-		sigField.className="length";
+		sigField.className="idLength";
 		sigField.id="sigField"+(i++);
 
 		var selPrm = isupData[paramHex];
 		var unitField=undefined;
 
-		var label=document.createElement("label");
-		label.textContent=selPrm._description+":";
-		label.className="bold";
+		if(selPrm._description!=undefined){
+			var label=document.createElement("label");
+			label.textContent=selPrm._description+":";
+			label.className="bold";
+			sigField.appendChild(label);
+		}
 		subField.appendChild(sigField);
-		sigField.appendChild(label);
 		
 		//設定項目が一つの場合
 	    for(var key in selPrm){
@@ -89,10 +91,13 @@ var addOptions = function(sel,val,text){
 
 var addMenu = function(target,paramId,subField){
 	var field=document.createElement("p");
-	var label=document.createElement("label");
 
-	field.appendChild(label);
-	label.textContent=target._description+":";
+	if(target._description!=undefined){
+		var label=document.createElement("label");
+		label.textContent=target._description+":";
+		field.appendChild(label);
+	}
+
 	if(target._input){
 		var inputObj=document.createElement("input");
 		inputObj.type="text";
@@ -112,9 +117,12 @@ var addMenu = function(target,paramId,subField){
 }
 var addAddButton = function(target,rootDescription,id,subField,pivotid){
 	var field=document.createElement("p");
-	var label=document.createElement("label");
-	field.appendChild(label);
-	label.textContent=rootDescription+":";
+	
+	if(target._description!=undefined){
+		var label=document.createElement("label");
+		label.textContent=rootDescription+":";
+		field.appendChild(label);
+	}
 	
 	subField.appendChild(field);
 
@@ -155,7 +163,13 @@ var addButtonEvent = function(obj,subField,select){
 			for(var key2 in target){
 				if(key2=="_add"){
 					var field=document.createElement("div");
-					field.className="length";
+					if(target[key2]._type!="noIdLength"){
+						field.className="idLength";
+					}else if(target[key2]._type=="length"){
+						field.className="length";
+					}else{
+						field.className="noLength";
+					}
 					field.value=key;
 					subField.appendChild(field);
 					addAddButton(target[key2],target._description,newid+",_add",field);
@@ -166,7 +180,7 @@ var addButtonEvent = function(obj,subField,select){
 						if(type=="idLength"){
 							var lengthField=document.createElement("div");
 							var lengthLabel=document.createElement("label");
-							lengthField.className="length";
+							lengthField.className="idLength";
 							lengthField.value=key;
 							lengthLabel.textContent=target._description+":";
 							lengthField.appendChild(lengthLabel);
@@ -195,7 +209,7 @@ var getSubResult = function(tag){
 	var childlen=tag.childNodes;
 	var result="";
 
-	if(divClass=="length"){
+	if(divClass=="idLength" || divClass=="length" || divClass=="noLength"){
 		for(var i=0;i<childlen.length;i++){
 			var tag=childlen[i];
 			if(tag.tagName.search("^[dD][iI][vV]$")!=-1){
@@ -203,8 +217,13 @@ var getSubResult = function(tag){
 			}
 		}
 		
-		result=zeroPadding(dec2hex(result.length/2),2)+result;
-		result=zeroPadding(divId,2)+result;
+		if(divClass=="length" || divClass=="idLength"){
+			console.log("aaaa");
+			result=zeroPadding(dec2hex(result.length/2),2)+result;
+		}
+		if(divClass=="idLength"){
+			result=zeroPadding(divId,2)+result;
+		}
 
 	}else if(divClass=="unit"){
 		result=createUnitSignal(tag);
