@@ -39,13 +39,21 @@ var selectParam = function(obj){
 	for(var idx=0;idx<selectIds.length;idx++){
 		paramHex=selectIds[idx];
 		var sigField=document.createElement("div");
-		
-		var result=[document.getElementById("result1"),document.getElementById("result2")];
 		sigField.textContent=null;
-		result[0].value="";
-		result[1].value="";
-		result[0].size=20;
-		result[1].size=20;
+	
+		var delBt=document.createElement("input");
+		var btP=document.createElement("p");
+		btP.className="right";
+
+		delBt.type="button";
+		delBt.value="x";
+		btP.appendChild(delBt);
+		delBt.onclick=function(){delButtonEvent(this);};
+		delBt.onmouseover=function(){delMouseOver(this);};
+		delBt.onmouseout=function(){delMouseOut(this);};
+		
+		sigField.appendChild(btP);
+
 		
 		sigField.value=paramHex;
 		sigField.className="idLength";
@@ -69,6 +77,17 @@ var selectParam = function(obj){
 	    			unitField=document.createElement("div");
 					unitField.className="unit";
 					sigField.appendChild(unitField);
+
+
+				//	var delUnitBt=document.createElement("input");
+				//	var btUnitP=document.createElement("p");
+				//	btUnitP.className="right";
+
+				//	delUnitBt.type="button";
+				//	delUnitBt.value="x";
+				//	btUnitP.appendChild(delUnitBt);
+				//	
+				//	unitField.appendChild(btUnitP);
 				}
 				addMenu(selPrm[key],paramHex+","+key,unitField);
 			}
@@ -130,9 +149,8 @@ var addAddButton = function(target,rootDescription,id,subField,pivotid){
 	var addButton=document.createElement("input");
 	var delButton=document.createElement("input");
 	addButton.type="button";
-	delButton.type="button";
+	delButton.type="hidden";
 	addButton.value="+";
-	delButton.value="-";
 	addButton.id=id+"_add";
 	addButton.onclick=function(){addButtonEvent(this,subField,childLabel);};
 
@@ -145,6 +163,19 @@ var addAddButton = function(target,rootDescription,id,subField,pivotid){
 	}
 
 }
+var delButtonEvent = function(obj){
+	var div=obj.parentNode.parentNode;
+	div.parentNode.removeChild(div);
+}
+var delMouseOver = function(obj){
+	var div=obj.parentNode.parentNode;
+	div.style.backgroundColor = "#fff8f8";
+}
+var delMouseOut = function(obj){
+	var div=obj.parentNode.parentNode;
+	div.style.backgroundColor = null;
+}
+
 var addButtonEvent = function(obj,subField,select){
 	var ids= select.value.split(",");
 	var newid="";
@@ -163,6 +194,20 @@ var addButtonEvent = function(obj,subField,select){
 			for(var key2 in target){
 				if(key2=="_add"){
 					var field=document.createElement("div");
+
+					var delBt=document.createElement("input");
+					var btP=document.createElement("p");
+					btP.className="right";
+
+					delBt.type="button";
+					delBt.value="x";
+					btP.appendChild(delBt);
+					delBt.onclick=function(){delButtonEvent(this,field);};
+					delBt.onmouseover=function(){delMouseOver(this);};
+					delBt.onmouseout=function(){delMouseOut(this);};
+					
+					field.appendChild(btP);
+
 					if(target[key2]._type!="noIdLength"){
 						field.className="idLength";
 					}else if(target[key2]._type=="length"){
@@ -177,14 +222,42 @@ var addButtonEvent = function(obj,subField,select){
 					if(unitField==undefined){
 						unitField=document.createElement("div");
 						unitField.className="unit";
+
+						var delBt=document.createElement("input");
+						var btP=document.createElement("p");
+						btP.className="right";
+						delBt.type="button";
+						delBt.value="x";
+						btP.appendChild(delBt);
+						delBt.onclick=function(){delButtonEvent(this);};
+						delBt.onmouseover=function(){delMouseOver(this);};
+						delBt.onmouseout=function(){delMouseOut(this);};
+						unitField.appendChild(btP);
+
 						if(type=="idLength"){
+							//console.log(target);
 							var lengthField=document.createElement("div");
 							var lengthLabel=document.createElement("label");
 							lengthField.className="idLength";
 							lengthField.value=key;
 							lengthLabel.textContent=target._description+":";
+
+
+							var delBt2=document.createElement("input");
+							var btP2=document.createElement("p");
+							btP2.className="right";
+
+							delBt2.type="button";
+							delBt2.value="x";
+							btP2.appendChild(delBt2);
+							delBt2.onclick=function(){delButtonEvent(this);};
+							delBt2.onmouseover=function(){delMouseOver(this);};
+							delBt2.onmouseout=function(){delMouseOut(this);};
+							lengthField.appendChild(btP2);
+
 							lengthField.appendChild(lengthLabel);
 							lengthField.appendChild(unitField);
+
 							subField.appendChild(lengthField);
 						}else{
 							subField.appendChild(unitField);
@@ -218,7 +291,7 @@ var getSubResult = function(tag){
 		}
 		
 		if(divClass=="length" || divClass=="idLength"){
-			console.log("aaaa");
+			//console.log("aaaa");
 			result=zeroPadding(dec2hex(result.length/2),2)+result;
 		}
 		if(divClass=="idLength"){

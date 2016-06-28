@@ -974,10 +974,10 @@
 
 	"8b":{ "_description":"リダイレクション順方向情報(国内用)",
 		"_add":{"_description":"情報種別識別子","_autoLength":true,
-			"0":{"_description":"未使用"},
-			"1":{"_description":"起動交換機への切戻し可能"},
-			"2":{"_description":"起動交換機への切戻し用呼識別子"},
-			"3":{"_description":"リダイレクション実行表示",
+			"0":{"_description":"未使用(0)"},
+			"1":{"_description":"起動交換機への切戻し可能(1)"},
+			"2":{"_description":"起動交換機への切戻し用呼識別子(2)"},
+			"3":{"_description":"リダイレクション実行表示(3)",
 				"_add":{
 					"unit":{
 						"_description":"リダイレクション実行理由",
@@ -1009,7 +1009,7 @@
 					}
 				}
 			},
-			"4":{"_description":"リダイレクション起動理由",
+			"4":{"_description":"リダイレクション起動理由(4)",
 				"0-8":{"_description":"拡張表示","_offset":[0,0,1],
 					"_values":{"0":"次のオクテットに続く","1":"最終オクテット"}
 				},
@@ -1464,7 +1464,7 @@
 	"f3":{ "_description":"付加ユーザ種別",
 		"_add":{
 			"fe":{
-				"_description":"固定系付加ユーザ種別1",
+				"_description":"固定系付加ユーザ種別1(fe)",
 				"0-87654321":{
 					"_description":"付加ユーザ種別名",
 					"_offset":[0,0,8],
@@ -1482,7 +1482,7 @@
 				}
 			},
 			"fd":{
-				"_description":"移動系付加ユーザ種別1",
+				"_description":"移動系付加ユーザ種別1(fd)",
 				"0-87654321":{
 					"_description":"付加ユーザ種別名",
 					"_offset":[0,0,8],
@@ -1503,7 +1503,7 @@
 				}
 			},
 			"fc":{
-				"_description":"移動系付加ユーザ種別2",
+				"_description":"移動系付加ユーザ種別2(fc)",
 				"0-87654321":{
 					"_description":"付加ユーザ種別名",
 					"_offset":[0,0,8],
@@ -1638,7 +1638,7 @@
 				"_add":{
 				"_type":"noIdLength",
 					"fe":{
-						"_description":"単位料金表示:表示なし",
+						"_description":"単位料金表示:表示なし(fe)",
 						"0-87654321":{
 							"_description":"単位料金表示",
 							"_offset":[0,0,8],
@@ -1663,7 +1663,7 @@
 						}
 					},
 					"fc.fd":{
-						"_description":"単位料金表示:表示あり",
+						"_description":"単位料金表示:表示あり(fc,fd)",
 						"0-87654321":{
 							"_description":"単位料金表示",
 							"_offset":[0,0,8],
